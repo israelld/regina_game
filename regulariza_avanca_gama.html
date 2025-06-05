@@ -420,6 +420,49 @@
             font-weight: bold;
             color: #333;
         }
+        .importar-json-label {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background: linear-gradient(45deg, #2196F3, #1976D2);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: bold;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    z-index: 1000;
+    transition: all 0.3s ease;
+    user-select: none;
+}
+
+.importar-json-label:hover {
+    background: linear-gradient(45deg, #42A5F5, #1E88E5);
+    transform: translateY(-2px);
+}
+.obstacle {
+    background: linear-gradient(135deg, #e53935, #b71c1c);
+    color: white;
+    border-radius: 12px;
+    border: 2px solid #c62828;
+    padding: 6px;
+    font-weight: bold;
+    text-align: center;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: pulseObstacle 2s infinite;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    font-size: 0.85rem;
+}
+
+@keyframes pulseObstacle {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
     </style>
 </head>
 
@@ -468,8 +511,8 @@
 
             </div>
             <div class="game-instructions" id="gameInstructions">
-                Use as setas do teclado ou WASD para mover. Colete documentos 📄 e evite obstáculos e os botões
-                numéricos (1, 2, 3 e 4) para responder o quiz!
+                Use as setas do teclado ou WASD para mover e os botões numéricos (1, 2, 3 e 4) para responder o quiz!
+                Colete documentos 📄 e evite obstáculos
             </div>
         </div>
 
@@ -479,7 +522,14 @@
                 <img src="https://regina.pi.gov.br/static_cgeo/img/logo-regina.png" alt="QR Code 2" class="qr-image">
             </div>
         </div>
-        <button id="btnExportarUsuarios" onclick="salvarUsuarioLocalEExportarTodos()">💾</button>
+
+        <button id="btnExportarUsuarios" onclick="salvarUsuarioLocalEExportarTodos()">💾 Salvar</button>
+        <label for="importarJson" class="importar-json-label">
+            📂 Carregar
+        </label>
+        <input type="file" id="importarJson" accept=".json" style="display: none;">
+        
+
     </div>
 
     <!-- Modal do Puzzle -->
@@ -503,6 +553,8 @@
 
         let gameStartTime = null;
         let gameEndTime = null;
+
+
 
         function salvarUsuarioLocalEExportarTodos() {
             const dadosAntigos = JSON.parse(localStorage.getItem('usuarios')) || [];
@@ -681,103 +733,110 @@
 
 
         function createLevelElements(level) {
-            const gameCanvas = document.getElementById('gameCanvas');
+    const gameCanvas = document.getElementById('gameCanvas');
 
-            // Dimensões do canvas para limites
-            const canvasRect = gameCanvas.getBoundingClientRect();
-            const canvasWidth = canvasRect.width - 60;
-            const canvasHeight = canvasRect.height - 80;
+    // Dimensões do canvas para limites
+    const canvasRect = gameCanvas.getBoundingClientRect();
+    const canvasWidth = canvasRect.width - 60;
+    const canvasHeight = canvasRect.height - 80;
 
-            const documentTypes = ['📄', '📋', '🗂️'];
-            const documentsToAdd = 3;
-            const docSize = 30;
+    const documentTypes = ['📄', '📋', '🗂️'];
+    const documentsToAdd = 3;
+    const docSize = 30;
 
-            // Obstáculos do nível
-            const obstacleData = {
-                1: [
-                    { x: 180, y: 200, width: 80, height: 40, text: 'Sobreposição' },
-                    { x: 350, y: 300, width: 80, height: 40, text: 'Conflito' }
-                ],
-                2: [
-                    { x: 150, y: 150, width: 60, height: 60, text: 'Reserva Legal' },
-                    { x: 300, y: 250, width: 80, height: 40, text: 'APP' },
-                    { x: 450, y: 180, width: 70, height: 50, text: 'Invasão' }
-                ],
-                3: [
-                    { x: 200, y: 120, width: 120, height: 30, text: 'Georreferenciamento' },
-                    { x: 320, y: 220, width: 80, height: 40, text: 'Medição' },
-                    { x: 180, y: 320, width: 85, height: 35, text: 'Topografia' },
-                    { x: 40, y: 120, width: 85, height: 35, text: '🦔' }
-                ]
-            };
+    // Obstáculos do nível
+    const obstacleIcons = ["🧱", "🚧", "⛔", "⚠️", "🌲", "🔥", "💥", "🚫"];
+    const obstacleData = {
+        1: [
+            { x: 180, y: 200, width: 80, height: 40, text: 'Sobreposição 🚧' },
+            { x: 350, y: 300, width: 80, height: 40, text: 'Conflito ⛔' },
+            { x: 120, y: 100, width: 60, height: 60, text: 'Área Protegida 🌲' }
+        ],
+        2: [
+            { x: 150, y: 150, width: 60, height: 60, text: 'Reserva Legal 🌱' },
+            { x: 300, y: 250, width: 80, height: 40, text: 'APP 🐦' },
+            { x: 450, y: 180, width: 70, height: 50, text: 'Invasão 🚫' },
+            { x: 100, y: 330, width: 90, height: 40, text: 'Barreira 💥' }
+        ],
+        3: [
+            { x: 200, y: 120, width: 120, height: 30, text: 'Geo 🔍' },
+            { x: 320, y: 220, width: 80, height: 40, text: 'Medição 📐' },
+            { x: 180, y: 320, width: 85, height: 35, text: 'Topografia 🧭' },
+            { x: 40, y: 120, width: 85, height: 35, text: 'Erizo 🦔' },
+            { x: 260, y: 170, width: 60, height: 40, text: '🔥 Incêndio' }
+        ]
+    };
 
-            const obstacles = obstacleData[level] || obstacleData[1];
+    // Clona os obstáculos do nível
+    const obstacles = [...(obstacleData[level] || obstacleData[1])];
 
-            // Adiciona os obstáculos ao canvas
-            obstacles.forEach(obs => {
-                const obstacle = document.createElement('div');
-                obstacle.className = 'obstacle';
-                obstacle.style.left = `${obs.x}px`;
-                obstacle.style.top = `${obs.y}px`;
-                obstacle.style.width = `${obs.width}px`;
-                obstacle.style.height = `${obs.height}px`;
-                obstacle.textContent = obs.text;
-                gameCanvas.appendChild(obstacle);
-            });
+    // Adiciona obstáculos aleatórios
+    for (let i = 0; i < 3; i++) {
+        const randX = Math.floor(Math.random() * (canvasWidth - 80));
+        const randY = Math.floor(Math.random() * (canvasHeight - 60));
+        const icon = obstacleIcons[Math.floor(Math.random() * obstacleIcons.length)];
+        obstacles.push({
+            x: randX,
+            y: randY,
+            width: 70,
+            height: 40,
+            text: `${icon}`
+        });
+    }
 
-            // Verifica colisão entre documento e obstáculos
-            function isOverlappingObstacle(x, y) {
-                return obstacles.some(obs => {
-                    return (
-                        x < obs.x + obs.width &&
-                        x + docSize > obs.x &&
-                        y < obs.y + obs.height &&
-                        y + docSize > obs.y
-                    );
-                });
+    // Renderiza obstáculos
+    obstacles.forEach(obs => {
+        const obstacle = document.createElement('div');
+        obstacle.className = 'obstacle';
+        obstacle.style.left = `${obs.x}px`;
+        obstacle.style.top = `${obs.y}px`;
+        obstacle.style.width = `${obs.width}px`;
+        obstacle.style.height = `${obs.height}px`;
+        obstacle.textContent = obs.text;
+        gameCanvas.appendChild(obstacle);
+    });
+
+    // Verifica colisão entre documento e obstáculos
+    function isOverlappingObstacleOrHUD(x, y) {
+        const overlapsObstacle = obstacles.some(obs => {
+            return (
+                x < obs.x + obs.width &&
+                x + docSize > obs.x &&
+                y < obs.y + obs.height &&
+                y + docSize > obs.y
+            );
+        });
+
+        const hudHeight = 60;
+        const overlapsHUD = y < hudHeight;
+
+        return overlapsObstacle || overlapsHUD;
+    }
+
+    // Gera documentos em posições válidas
+    for (let i = 0; i < documentsToAdd; i++) {
+        let validPosition = false;
+        let attempts = 0;
+        let x = 0;
+        let y = 0;
+
+        while (!validPosition && attempts < 100) {
+            x = Math.floor(Math.random() * canvasWidth);
+            y = Math.floor(Math.random() * canvasHeight);
+            if (!isOverlappingObstacleOrHUD(x, y)) {
+                validPosition = true;
             }
-            function isOverlappingObstacleOrHUD(x, y) {
-                // Bloquear sobreposição com obstáculos
-                const overlapsObstacle = obstacles.some(obs => {
-                    return (
-                        x < obs.x + obs.width &&
-                        x + docSize > obs.x &&
-                        y < obs.y + obs.height &&
-                        y + docSize > obs.y
-                    );
-                });
-
-                // Bloquear sobreposição com HUD fixo (assumindo altura 60px no topo)
-                const hudHeight = 60;
-                const overlapsHUD = y < hudHeight;
-
-                return overlapsObstacle || overlapsHUD;
-            }
-
-            // Gera documentos em posições válidas
-            for (let i = 0; i < documentsToAdd; i++) {
-                let validPosition = false;
-                let attempts = 0;
-                let x = 0;
-                let y = 0;
-
-                while (!validPosition && attempts < 100) {
-                    x = Math.floor(Math.random() * canvasWidth);
-                    y = Math.floor(Math.random() * canvasHeight);
-                    if (!isOverlappingObstacleOrHUD(x, y)) {
-                        validPosition = true;
-                    }
-                    attempts++;
-                }
-
-                const doc = document.createElement('div');
-                doc.className = 'document';
-                doc.innerHTML = documentTypes[i];
-                doc.style.left = `${x}px`;
-                doc.style.top = `${y}px`;
-                gameCanvas.appendChild(doc);
-            }
+            attempts++;
         }
+
+        const doc = document.createElement('div');
+        doc.className = 'document';
+        doc.innerHTML = documentTypes[i];
+        doc.style.left = `${x}px`;
+        doc.style.top = `${y}px`;
+        gameCanvas.appendChild(doc);
+    }
+}
 
 
         function handleKeyPress(event) {
@@ -1056,6 +1115,34 @@
                 document.getElementById('phone').value = '';
             }, 10000);
         }
+
+        document.getElementById('importarJson').addEventListener('change', function (event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                try {
+                    const importedData = JSON.parse(e.target.result);
+
+                    if (!Array.isArray(importedData)) {
+                        alert("O arquivo deve conter uma lista de jogadores.");
+                        return;
+                    }
+
+                    // Salvar no localStorage
+                    localStorage.setItem('usuarios', JSON.stringify(importedData));
+                    alert("✅ Dados de jogadores importados com sucesso!");
+
+                } catch (err) {
+                    alert("❌ Erro ao importar o JSON: " + err.message);
+                }
+            };
+
+            reader.readAsText(file);
+        });
+
+        console.log("Jogadores importados:", importedData);
     </script>
     <div id="rankingModal" style="display:none;">
         <div class="ranking-content">
