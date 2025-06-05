@@ -375,6 +375,51 @@
         #btnExportarUsuarios:hover {
             background-color: #388e3c;
         }
+
+        #rankingModal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+        }
+
+        .ranking-content {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            font-family: 'Arial', sans-serif;
+        }
+
+        .ranking-content h2 {
+            margin-bottom: 20px;
+            color: #4CAF50;
+        }
+
+        .ranking-content ol {
+            text-align: left;
+            padding-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        .ranking-content li {
+            font-size: 1rem;
+            margin: 5px 0;
+        }
+
+        .ranking-content p {
+            font-weight: bold;
+            color: #333;
+        }
     </style>
 </head>
 
@@ -423,7 +468,8 @@
 
             </div>
             <div class="game-instructions" id="gameInstructions">
-                Use as setas do teclado ou WASD para mover. Colete documentos 📄 e evite obstáculos e os botões numéricos (1, 2, 3 e 4) para responder o quiz!
+                Use as setas do teclado ou WASD para mover. Colete documentos 📄 e evite obstáculos e os botões
+                numéricos (1, 2, 3 e 4) para responder o quiz!
             </div>
         </div>
 
@@ -925,16 +971,14 @@
                     currentPlayer.totalTimeSeconds = totalSeconds;
                     currentPlayer.totalTimeFormatted = tempoFormatado;
 
-                    alert(`🎉 Parabéns ${currentPlayer.fullName}! Você completou todos os níveis!\n\nTempo total: ${tempoFormatado}\nPontuação Final: ${currentPlayer.totalScore} pontos`);
+                    // Salvar no localStorage
+                    const dadosAntigos = JSON.parse(localStorage.getItem('usuarios')) || [];
+                    const jaExiste = dadosAntigos.some(u => u.id === currentPlayer.id);
+                    if (!jaExiste) dadosAntigos.push(currentPlayer);
+                    localStorage.setItem('usuarios', JSON.stringify(dadosAntigos));
 
-                    // Reiniciar jogo
-                    document.getElementById('gameCanvas').style.display = 'none';
-                    document.getElementById('registrationForm').style.display = 'block';
-
-                    // Limpar formulário
-                    document.getElementById('fullName').value = '';
-                    document.getElementById('email').value = '';
-                    document.getElementById('phone').value = '';
+                    // Mostrar ranking
+                    mostrarRanking(dadosAntigos, currentPlayer);
                 }
             }, 1500);
 
@@ -979,7 +1023,47 @@
             gameCanvas.style.width = '600px';
             gameCanvas.style.height = '450px';
         });
+        function mostrarRanking(todosJogadores, jogadorAtual) {
+            // Ordenar pelo tempo crescente
+            const jogadoresComTempo = todosJogadores.filter(j => j.totalTimeSeconds);
+            jogadoresComTempo.sort((a, b) => a.totalTimeSeconds - b.totalTimeSeconds);
+
+            // Top 3
+            const top3 = jogadoresComTempo.slice(0, 3);
+
+            // Montar lista
+            const rankingLista = document.getElementById('rankingLista');
+            rankingLista.innerHTML = '';
+            top3.forEach((jogador, index) => {
+                rankingLista.innerHTML += `<li><strong>${jogador.fullName}</strong> - ⏱ ${jogador.totalTimeFormatted}</li>`;
+            });
+
+            // Encontra posição do jogador atual
+            const posicao = jogadoresComTempo.findIndex(j => j.id === jogadorAtual.id) + 1;
+            const suaPosicao = document.getElementById('suaPosicao');
+            suaPosicao.innerHTML = `🏅 Sua posição: ${posicao}º lugar — Tempo: ${jogadorAtual.totalTimeFormatted} — Pontuação: ${jogadorAtual.totalScore} pontos`;
+
+            document.getElementById('rankingModal').style.display = 'flex';
+
+            // Oculta após 6s e reinicia
+            setTimeout(() => {
+                document.getElementById('rankingModal').style.display = 'none';
+                document.getElementById('gameCanvas').style.display = 'none';
+                document.getElementById('registrationForm').style.display = 'block';
+
+                document.getElementById('fullName').value = '';
+                document.getElementById('email').value = '';
+                document.getElementById('phone').value = '';
+            }, 10000);
+        }
     </script>
+    <div id="rankingModal" style="display:none;">
+        <div class="ranking-content">
+            <h2>🏆 Ranking dos Mais Rápidos</h2>
+            <ol id="rankingLista"></ol>
+            <p id="suaPosicao"></p>
+        </div>
+    </div>
 </body>
 
 </html>
