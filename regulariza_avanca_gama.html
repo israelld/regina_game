@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,8 +26,8 @@
         }
 
         .sidebar {
-            <!-- width: 200px; -->
-			width: 25%;
+            < !-- width: 200px;
+            -->width: 25%;
             background: linear-gradient(180deg, #2c5530 0%, #1a3d1f 100%);
             display: flex;
             flex-direction: column;
@@ -43,26 +44,26 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background-image: 
-                linear-gradient(45deg, rgba(255,255,255,0.1) 25%, transparent 25%),
-                linear-gradient(-45deg, rgba(255,255,255,0.1) 25%, transparent 25%),
-                linear-gradient(45deg, transparent 75%, rgba(255,255,255,0.1) 75%),
-                linear-gradient(-45deg, transparent 75%, rgba(255,255,255,0.1) 75%);
+            background-image:
+                linear-gradient(45deg, rgba(255, 255, 255, 0.1) 25%, transparent 25%),
+                linear-gradient(-45deg, rgba(255, 255, 255, 0.1) 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, rgba(255, 255, 255, 0.1) 75%),
+                linear-gradient(-45deg, transparent 75%, rgba(255, 255, 255, 0.1) 75%);
             background-size: 20px 20px;
             background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
             opacity: 0.3;
         }
 
         .sidebar-content {
-    z-index: 2;
-    text-align: center;
-    color: white;
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
+            z-index: 2;
+            text-align: center;
+            color: white;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
 
         .building-icon {
             font-size: 4rem;
@@ -71,12 +72,19 @@
         }
 
         @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
         }
 
         .game-area {
-			width: 50%;
+            width: 50%;
             flex: 1;
             background: #f0f8ff;
             position: relative;
@@ -90,7 +98,7 @@
             background: white;
             padding: 30px;
             border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             max-width: 400px;
             width: 90%;
             text-align: center;
@@ -98,8 +106,15 @@
         }
 
         @keyframes slideIn {
-            from { transform: translateY(-50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
         }
 
         .form-title {
@@ -166,7 +181,7 @@
             top: 10px;
             left: 10px;
             right: 10px;
-            background: rgba(0,0,0,0.7);
+            background: rgba(0, 0, 0, 0.7);
             color: white;
             padding: 10px;
             border-radius: 10px;
@@ -205,8 +220,15 @@
         }
 
         @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
         }
 
         .obstacle {
@@ -229,7 +251,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0,0,0,0.8);
+            background: rgba(0, 0, 0, 0.8);
             display: none;
             align-items: center;
             justify-content: center;
@@ -271,7 +293,7 @@
             bottom: 20px;
             left: 20px;
             right: 20px;
-            background: rgba(0,0,0,0.7);
+            background: rgba(0, 0, 0, 0.7);
             color: white;
             padding: 15px;
             border-radius: 10px;
@@ -287,7 +309,7 @@
             padding: 30px;
             border-radius: 20px;
             text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             display: none;
             z-index: 50;
         }
@@ -312,54 +334,58 @@
         .next-level-btn:hover {
             transform: translateY(-2px);
         }
-		.game-instructions {
-    margin-top: 15px;
-    background: rgba(0,0,0,0.6);
-    color: white;
-    padding: 10px 15px;
-    border-radius: 10px;
-    font-size: 0.95rem;
-    text-align: center;
-    max-width: 550px;
-}
-.qr-image {
-    width: 100%;
-    max-width: 200px;
-    height: auto;
-    border: 5px solid white;
-    border-radius: 15px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-	background-color: white;
-}
-#btnExportarUsuarios {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 50px;
-    padding: 12px 20px;
-    font-size: 14px;
-    cursor: pointer;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-    z-index: 1000;
-    transition: background-color 0.3s;
-}
 
-#btnExportarUsuarios:hover {
-    background-color: #388e3c;
-}
+        .game-instructions {
+            margin-top: 15px;
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            text-align: center;
+            max-width: 550px;
+        }
+
+        .qr-image {
+            width: 100%;
+            max-width: 200px;
+            height: auto;
+            border: 5px solid white;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            background-color: white;
+        }
+
+        #btnExportarUsuarios {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 12px 20px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            transition: background-color 0.3s;
+        }
+
+        #btnExportarUsuarios:hover {
+            background-color: #388e3c;
+        }
     </style>
 </head>
+
 <body>
     <div class="container">
         <!-- Sidebar Esquerda -->
         <div class="sidebar">
-    <div class="sidebar-content">
-        <img src="qrcode1.jpeg" alt="QR Code 1" class="qr-image">
-    </div>
-</div>
+            <div class="sidebar-content">
+                <img src="qrcode1.jpeg" alt="QR Code 1" class="qr-image">
+            </div>
+        </div>
 
         <!-- Área do Jogo -->
         <div class="game-area">
@@ -367,47 +393,47 @@
             <div class="registration-form" id="registrationForm">
                 <h2 class="form-title">🏠 Regulariza & Avança </h2>
                 <p style="margin-bottom: 20px; color: #666;">Cadastre-se para iniciar sua jornada!</p>
-                
+
                 <div class="form-group">
                     <label for="fullName">Nome Completo:</label>
                     <input type="text" id="fullName" required>
                 </div>
-                
+
                 <div class="form-group">
                     <label for="email">Email:</label>
                     <input type="email" id="email" required>
                 </div>
-                
+
                 <div class="form-group">
                     <label for="phone">Telefone:</label>
                     <input type="tel" id="phone" required>
                 </div>
-                
+
                 <button class="start-button" onclick="startGame()">Iniciar Aventura! 🚀</button>
             </div>
-			
-			
+
+
             <!-- Canvas do Jogo -->
             <div class="game-canvas" id="gameCanvas">
-            <div class="game-hud">
+                <div class="game-hud">
                     <div>Nível: <span id="currentLevel">1</span></div>
                     <div>Documentos: <span id="documentsCollected">0</span>/3</div>
                     <div>Jogador: <span id="playerName">-</span></div>
-                </div>    
-                
+                </div>
+
             </div>
-			<div class="game-instructions" id="gameInstructions">
-				Use as setas do teclado ou WASD para mover. Colete documentos 📄 e evite obstáculos!
-			</div>
+            <div class="game-instructions" id="gameInstructions">
+                Use as setas do teclado ou WASD para mover. Colete documentos 📄 e evite obstáculos e os botões numéricos (1, 2, 3 e 4) para responder o quiz!
+            </div>
         </div>
 
         <!-- Sidebar Direita -->
         <div class="sidebar">
-    <div class="sidebar-content">
-        <img src="https://regina.pi.gov.br/static_cgeo/img/logo-regina.png" alt="QR Code 2" class="qr-image">
-    </div>
-</div>
-<button id="btnExportarUsuarios" onclick="salvarUsuarioLocalEExportarTodos()">💾</button>
+            <div class="sidebar-content">
+                <img src="https://regina.pi.gov.br/static_cgeo/img/logo-regina.png" alt="QR Code 2" class="qr-image">
+            </div>
+        </div>
+        <button id="btnExportarUsuarios" onclick="salvarUsuarioLocalEExportarTodos()">💾</button>
     </div>
 
     <!-- Modal do Puzzle -->
@@ -424,30 +450,34 @@
     <div class="level-complete" id="levelComplete">
         <h2 class="complete-title">🎉 Nível Concluído!</h2>
         <p id="completionMessage">Parabéns! Você regularizou com sucesso este imóvel.</p>
-        <button class="next-level-btn" onclick="nextLevel()">Próximo Nível</button>
+        <!-- <button class="next-level-btn" onclick="nextLevel()">Próximo Nível</button> -->
     </div>
 
     <script>
-	function salvarUsuarioLocalEExportarTodos() {
-    const dadosAntigos = JSON.parse(localStorage.getItem('usuarios')) || [];
 
-    // Atualiza com dados da sessão atual, se ainda não estiverem salvos
-    playersData.forEach(p => {
-        if (!dadosAntigos.some(u => u.id === p.id)) {
-            dadosAntigos.push(p);
+        let gameStartTime = null;
+        let gameEndTime = null;
+
+        function salvarUsuarioLocalEExportarTodos() {
+            const dadosAntigos = JSON.parse(localStorage.getItem('usuarios')) || [];
+
+            // Atualiza com dados da sessão atual, se ainda não estiverem salvos
+            playersData.forEach(p => {
+                if (!dadosAntigos.some(u => u.id === p.id)) {
+                    dadosAntigos.push(p);
+                }
+            });
+
+            localStorage.setItem('usuarios', JSON.stringify(dadosAntigos));
+
+            const blob = new Blob([JSON.stringify(dadosAntigos, null, 2)], { type: "application/json" });
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.download = "usuarios.json";
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
         }
-    });
-
-    localStorage.setItem('usuarios', JSON.stringify(dadosAntigos));
-
-    const blob = new Blob([JSON.stringify(dadosAntigos, null, 2)], { type: "application/json" });
-    const link = document.createElement("a");
-    link.href = URL.createObjectURL(blob);
-    link.download = "usuarios.json";
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-}
 
         // Sistema de dados dos jogadores
         let playersData = [];
@@ -467,53 +497,53 @@
                 title: "Matrícula do Imóvel",
                 question: "Qual documento é essencial para comprovar a propriedade?",
                 options: [
-                    { text: "Matrícula do Imóvel", correct: true },
-                    { text: "Conta de Luz", correct: false },
-                    { text: "CPF do Proprietário", correct: false },
-                    { text: "Foto da Casa", correct: false }
+                    { text: "(1) Matrícula do Imóvel", correct: true },
+                    { text: "(2) Conta de Luz", correct: false },
+                    { text: "(3) CPF do Proprietário", correct: false },
+                    { text: "(4) Foto da Casa", correct: false }
                 ]
             },
             2: {
                 title: "INTERPI",
                 question: "Qual o papel principal do INTERPI?",
                 options: [
-                    { text: "Reforma agrária", correct: false },
-                    { text: "Licenciamento ambiental", correct: false },
-                    { text: "Regularização fundiária", correct: true },
-                    { text: "Realizar shows e eventos", correct: false }
+                    { text: "(1) Reforma agrária", correct: false },
+                    { text: "(2) Licenciamento ambiental", correct: false },
+                    { text: "(3) Regularização fundiária", correct: true },
+                    { text: "(4) Realizar shows e eventos", correct: false }
                 ]
             },
             3: {
                 title: "Georreferenciamento",
                 question: "Para que serve o georreferenciamento de imóveis?",
                 options: [
-                    { text: "Apenas decoração", correct: false },
-                    { text: "Localização precisa e limites", correct: true },
-                    { text: "Calcular impostos", correct: false },
-                    { text: "Definir cores", correct: false }
+                    { text: "(1) Apenas decoração", correct: false },
+                    { text: "(2) Localização precisa e limites", correct: true },
+                    { text: "(3) Calcular impostos", correct: false },
+                    { text: "(4) Definir cores", correct: false }
                 ]
             }
         };
-		
-		function salvarUsuarioLocalEExportar(currentPlayer) {
-    // Carrega usuários antigos do localStorage
-    const dadosAntigos = JSON.parse(localStorage.getItem('usuarios')) || [];
-    
-    // Adiciona novo usuário
-    dadosAntigos.push(currentPlayer);
-    
-    // Salva de volta
-    localStorage.setItem('usuarios', JSON.stringify(dadosAntigos));
 
-    // Cria e baixa o JSON acumulado
-    const blob = new Blob([JSON.stringify(dadosAntigos, null, 2)], { type: "application/json" });
-    const link = document.createElement("a");
-    link.href = URL.createObjectURL(blob);
-    link.download = "usuarios.json";
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-}
+        function salvarUsuarioLocalEExportar(currentPlayer) {
+            // Carrega usuários antigos do localStorage
+            const dadosAntigos = JSON.parse(localStorage.getItem('usuarios')) || [];
+
+            // Adiciona novo usuário
+            dadosAntigos.push(currentPlayer);
+
+            // Salva de volta
+            localStorage.setItem('usuarios', JSON.stringify(dadosAntigos));
+
+            // Cria e baixa o JSON acumulado
+            const blob = new Blob([JSON.stringify(dadosAntigos, null, 2)], { type: "application/json" });
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.download = "usuarios.json";
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
 
         function startGame() {
             const fullName = document.getElementById('fullName').value.trim();
@@ -552,10 +582,12 @@
             document.getElementById('gameCanvas').style.display = 'block';
             document.getElementById('playerName').textContent = fullName.split(' ')[0];
 
+            gameStartTime = Date.now(); // marca o início do jogo
+
             // Inicializar jogo
             initializeLevel(1);
-			
-			playersData.push(currentPlayer);
+
+            playersData.push(currentPlayer);
         }
 
         function initializeLevel(level) {
@@ -583,123 +615,123 @@
         }
 
         function createPlayer() {
-    const player = document.createElement('div');
-    player.className = 'player';
-    player.id = 'player';
+            const player = document.createElement('div');
+            player.className = 'player';
+            player.id = 'player';
 
-    const img = document.createElement('img');
-    img.style.width = '50px';
-    img.src = 'https://sig.interpi.pi.gov.br/static/img/regina_icon.png';
-    img.alt = 'Regina';
+            const img = document.createElement('img');
+            img.style.width = '50px';
+            img.src = 'https://sig.interpi.pi.gov.br/static/img/regina_icon.png';
+            img.alt = 'Regina';
 
-    player.appendChild(img);
+            player.appendChild(img);
 
-    player.style.position = 'absolute'; // Certifique-se de que ele seja posicionável
-    player.style.left = gameState.playerPosition.x + 'px';
-    player.style.top = gameState.playerPosition.y + 'px';
+            player.style.position = 'absolute'; // Certifique-se de que ele seja posicionável
+            player.style.left = gameState.playerPosition.x + 'px';
+            player.style.top = gameState.playerPosition.y + 'px';
 
-    document.getElementById('gameCanvas').appendChild(player);
-}
+            document.getElementById('gameCanvas').appendChild(player);
+        }
 
 
         function createLevelElements(level) {
-    const gameCanvas = document.getElementById('gameCanvas');
+            const gameCanvas = document.getElementById('gameCanvas');
 
-    // Dimensões do canvas para limites
-    const canvasRect = gameCanvas.getBoundingClientRect();
-    const canvasWidth = canvasRect.width - 60;
-    const canvasHeight = canvasRect.height - 80;
+            // Dimensões do canvas para limites
+            const canvasRect = gameCanvas.getBoundingClientRect();
+            const canvasWidth = canvasRect.width - 60;
+            const canvasHeight = canvasRect.height - 80;
 
-    const documentTypes = ['📄', '📋', '🗂️'];
-    const documentsToAdd = 3;
-    const docSize = 30;
+            const documentTypes = ['📄', '📋', '🗂️'];
+            const documentsToAdd = 3;
+            const docSize = 30;
 
-    // Obstáculos do nível
-    const obstacleData = {
-        1: [
-            { x: 180, y: 200, width: 80, height: 40, text: 'Sobreposição' },
-            { x: 350, y: 300, width: 80, height: 40, text: 'Conflito' }
-        ],
-        2: [
-            { x: 150, y: 150, width: 60, height: 60, text: 'Reserva Legal' },
-            { x: 300, y: 250, width: 80, height: 40, text: 'APP' },
-            { x: 450, y: 180, width: 70, height: 50, text: 'Invasão' }
-        ],
-        3: [
-            { x: 200, y: 120, width: 120, height: 30, text: 'Georreferenciamento' },
-            { x: 320, y: 220, width: 80, height: 40, text: 'Medição' },
-            { x: 180, y: 320, width: 85, height: 35, text: 'Topografia' },
-			{ x: 40, y: 120, width: 85, height: 35, text: '🦔'}
-        ]
-    };
+            // Obstáculos do nível
+            const obstacleData = {
+                1: [
+                    { x: 180, y: 200, width: 80, height: 40, text: 'Sobreposição' },
+                    { x: 350, y: 300, width: 80, height: 40, text: 'Conflito' }
+                ],
+                2: [
+                    { x: 150, y: 150, width: 60, height: 60, text: 'Reserva Legal' },
+                    { x: 300, y: 250, width: 80, height: 40, text: 'APP' },
+                    { x: 450, y: 180, width: 70, height: 50, text: 'Invasão' }
+                ],
+                3: [
+                    { x: 200, y: 120, width: 120, height: 30, text: 'Georreferenciamento' },
+                    { x: 320, y: 220, width: 80, height: 40, text: 'Medição' },
+                    { x: 180, y: 320, width: 85, height: 35, text: 'Topografia' },
+                    { x: 40, y: 120, width: 85, height: 35, text: '🦔' }
+                ]
+            };
 
-    const obstacles = obstacleData[level] || obstacleData[1];
+            const obstacles = obstacleData[level] || obstacleData[1];
 
-    // Adiciona os obstáculos ao canvas
-    obstacles.forEach(obs => {
-        const obstacle = document.createElement('div');
-        obstacle.className = 'obstacle';
-        obstacle.style.left = `${obs.x}px`;
-        obstacle.style.top = `${obs.y}px`;
-        obstacle.style.width = `${obs.width}px`;
-        obstacle.style.height = `${obs.height}px`;
-        obstacle.textContent = obs.text;
-        gameCanvas.appendChild(obstacle);
-    });
+            // Adiciona os obstáculos ao canvas
+            obstacles.forEach(obs => {
+                const obstacle = document.createElement('div');
+                obstacle.className = 'obstacle';
+                obstacle.style.left = `${obs.x}px`;
+                obstacle.style.top = `${obs.y}px`;
+                obstacle.style.width = `${obs.width}px`;
+                obstacle.style.height = `${obs.height}px`;
+                obstacle.textContent = obs.text;
+                gameCanvas.appendChild(obstacle);
+            });
 
-    // Verifica colisão entre documento e obstáculos
-    function isOverlappingObstacle(x, y) {
-        return obstacles.some(obs => {
-            return (
-                x < obs.x + obs.width &&
-                x + docSize > obs.x &&
-                y < obs.y + obs.height &&
-                y + docSize > obs.y
-            );
-        });
-    }
-	function isOverlappingObstacleOrHUD(x, y) {
-    // Bloquear sobreposição com obstáculos
-    const overlapsObstacle = obstacles.some(obs => {
-        return (
-            x < obs.x + obs.width &&
-            x + docSize > obs.x &&
-            y < obs.y + obs.height &&
-            y + docSize > obs.y
-        );
-    });
-
-    // Bloquear sobreposição com HUD fixo (assumindo altura 60px no topo)
-    const hudHeight = 60;
-    const overlapsHUD = y < hudHeight;
-
-    return overlapsObstacle || overlapsHUD;
-}
-
-    // Gera documentos em posições válidas
-    for (let i = 0; i < documentsToAdd; i++) {
-        let validPosition = false;
-        let attempts = 0;
-        let x = 0;
-        let y = 0;
-
-        while (!validPosition && attempts < 100) {
-            x = Math.floor(Math.random() * canvasWidth);
-            y = Math.floor(Math.random() * canvasHeight);
-            if (!isOverlappingObstacleOrHUD(x, y)) {
-                validPosition = true;
+            // Verifica colisão entre documento e obstáculos
+            function isOverlappingObstacle(x, y) {
+                return obstacles.some(obs => {
+                    return (
+                        x < obs.x + obs.width &&
+                        x + docSize > obs.x &&
+                        y < obs.y + obs.height &&
+                        y + docSize > obs.y
+                    );
+                });
             }
-            attempts++;
-        }
+            function isOverlappingObstacleOrHUD(x, y) {
+                // Bloquear sobreposição com obstáculos
+                const overlapsObstacle = obstacles.some(obs => {
+                    return (
+                        x < obs.x + obs.width &&
+                        x + docSize > obs.x &&
+                        y < obs.y + obs.height &&
+                        y + docSize > obs.y
+                    );
+                });
 
-        const doc = document.createElement('div');
-        doc.className = 'document';
-        doc.innerHTML = documentTypes[i];
-        doc.style.left = `${x}px`;
-        doc.style.top = `${y}px`;
-        gameCanvas.appendChild(doc);
-    }
-}
+                // Bloquear sobreposição com HUD fixo (assumindo altura 60px no topo)
+                const hudHeight = 60;
+                const overlapsHUD = y < hudHeight;
+
+                return overlapsObstacle || overlapsHUD;
+            }
+
+            // Gera documentos em posições válidas
+            for (let i = 0; i < documentsToAdd; i++) {
+                let validPosition = false;
+                let attempts = 0;
+                let x = 0;
+                let y = 0;
+
+                while (!validPosition && attempts < 100) {
+                    x = Math.floor(Math.random() * canvasWidth);
+                    y = Math.floor(Math.random() * canvasHeight);
+                    if (!isOverlappingObstacleOrHUD(x, y)) {
+                        validPosition = true;
+                    }
+                    attempts++;
+                }
+
+                const doc = document.createElement('div');
+                doc.className = 'document';
+                doc.innerHTML = documentTypes[i];
+                doc.style.left = `${x}px`;
+                doc.style.top = `${y}px`;
+                gameCanvas.appendChild(doc);
+            }
+        }
 
 
         function handleKeyPress(event) {
@@ -712,7 +744,7 @@
             let newY = currentY;
 
             // Movimentação
-            switch(event.key) {
+            switch (event.key) {
                 case 'ArrowUp':
                 case 'w':
                 case 'W':
@@ -779,7 +811,7 @@
                     x + playerSize > docX &&
                     y < docY + docSize &&
                     y + playerSize > docY) {
-                    
+
                     doc.remove();
                     gameState.documentsCollected++;
                     document.getElementById('documentsCollected').textContent = gameState.documentsCollected;
@@ -795,10 +827,10 @@
         function showPuzzle() {
             gameState.gameActive = false;
             const puzzle = puzzles[gameState.level] || puzzles[1];
-            
+
             document.getElementById('puzzleTitle').textContent = puzzle.title;
             document.getElementById('puzzleQuestion').textContent = puzzle.question;
-            
+
             const optionsContainer = document.getElementById('puzzleOptions');
             optionsContainer.innerHTML = '';
 
@@ -811,61 +843,129 @@
             });
 
             document.getElementById('puzzleModal').style.display = 'flex';
+
+            // Habilita seleção por número do teclado
+            document.addEventListener('keydown', handlePuzzleKey);
         }
 
-        function selectPuzzleOption(isCorrect, index) {
-    const options = document.querySelectorAll('.puzzle-option');
+        function handlePuzzleKey(event) {
+            const key = event.key;
+            if (['1', '2', '3', '4'].includes(key)) {
+                const index = parseInt(key) - 1;
+                const options = document.querySelectorAll('.puzzle-option');
+                if (options[index]) {
+                    const isCorrect = puzzles[gameState.level].options[index].correct;
+                    selectPuzzleOption(isCorrect, index);
+                    document.removeEventListener('keydown', handlePuzzleKey);
+                }
+            }
+        }
 
-    if (isCorrect) {
-        options[index].style.background = '#4CAF50';
-        options[index].style.color = 'white';
-    } else {
-        options[index].style.background = '#f44336';
-        options[index].style.color = 'white';
-        // Penalizar jogador
-        currentPlayer.totalScore = Math.max(0, currentPlayer.totalScore - 50);
-    }
+        function selectPuzzleOption(isCorrect, selectedIndex) {
+            const options = document.querySelectorAll('.puzzle-option');
 
-    // Após 1 segundo, seguir para o próximo passo
-    setTimeout(() => {
-        document.getElementById('puzzleModal').style.display = 'none';
-        completeLevel(); // continua o jogo mesmo se errou
-    }, 1000);
-}
+            // Marcar seleção feita
+            if (isCorrect) {
+                options[selectedIndex].style.background = '#4CAF50';
+                options[selectedIndex].style.color = 'white';
+            } else {
+                options[selectedIndex].style.background = '#f44336';
+                options[selectedIndex].style.color = 'white';
+
+                // Penalizar jogador
+                currentPlayer.totalScore = Math.max(0, currentPlayer.totalScore - 50);
+
+                // Mostrar a correta
+                puzzles[gameState.level].options.forEach((opt, i) => {
+                    if (opt.correct) {
+                        options[i].style.background = '#4CAF50';
+                        options[i].style.color = 'white';
+                    }
+                });
+            }
+
+            // Após 1s, encerrar modal e seguir
+            setTimeout(() => {
+                document.getElementById('puzzleModal').style.display = 'none';
+                completeLevel(); // segue para próxima fase
+            }, 1000);
+        }
+
 
 
         function completeLevel() {
             currentPlayer.levelsCompleted = gameState.level;
             currentPlayer.totalScore += gameState.level * 100;
-            
+
             const messages = [
                 "Você conseguiu regularizar este imóvel urbano!",
                 "Propriedade rural regularizada com sucesso!",
                 "Processo de georreferenciamento concluído!"
             ];
 
-            document.getElementById('completionMessage').textContent = 
+            document.getElementById('completionMessage').textContent =
                 messages[gameState.level - 1] || "Parabéns pela regularização!";
-            
+
             document.getElementById('levelComplete').style.display = 'block';
 
-            // Atualizar dados do jogador
+            // Esconde após 1.5s e avança automaticamente
+            setTimeout(() => {
+                document.getElementById('levelComplete').style.display = 'none';
+
+                if (gameState.level < 3) {
+                    initializeLevel(gameState.level + 1);
+                } else {
+                    gameEndTime = Date.now();
+                    const totalTimeMs = gameEndTime - gameStartTime;
+                    const totalSeconds = Math.floor(totalTimeMs / 1000);
+                    const minutos = Math.floor(totalSeconds / 60);
+                    const segundos = totalSeconds % 60;
+                    const tempoFormatado = `${minutos}m ${segundos}s`;
+
+                    currentPlayer.totalTimeSeconds = totalSeconds;
+                    currentPlayer.totalTimeFormatted = tempoFormatado;
+
+                    alert(`🎉 Parabéns ${currentPlayer.fullName}! Você completou todos os níveis!\n\nTempo total: ${tempoFormatado}\nPontuação Final: ${currentPlayer.totalScore} pontos`);
+
+                    // Reiniciar jogo
+                    document.getElementById('gameCanvas').style.display = 'none';
+                    document.getElementById('registrationForm').style.display = 'block';
+
+                    // Limpar formulário
+                    document.getElementById('fullName').value = '';
+                    document.getElementById('email').value = '';
+                    document.getElementById('phone').value = '';
+                }
+            }, 1500);
+
+            // Atualizar dados
             console.log('Dados Atualizados:', JSON.stringify(playersData, null, 2));
         }
 
+
         function nextLevel() {
             document.getElementById('levelComplete').style.display = 'none';
-            
+
             if (gameState.level < 3) {
                 initializeLevel(gameState.level + 1);
             } else {
                 // Jogo completo
-                alert(`🎉 Parabéns ${currentPlayer.fullName}! Você completou todos os níveis!\n\nPontuação Final: ${currentPlayer.totalScore} pontos`);
-                
+                gameEndTime = Date.now();
+                const totalTimeMs = gameEndTime - gameStartTime;
+                const totalSeconds = Math.floor(totalTimeMs / 1000);
+                const minutos = Math.floor(totalSeconds / 60);
+                const segundos = totalSeconds % 60;
+                const tempoFormatado = `${minutos}m ${segundos}s`;
+
+                currentPlayer.totalTimeSeconds = totalSeconds;
+                currentPlayer.totalTimeFormatted = tempoFormatado;
+
+                alert(`🎉 Parabéns ${currentPlayer.fullName}! Você completou todos os níveis!\n\nTempo total: ${tempoFormatado}\nPontuação Final: ${currentPlayer.totalScore} pontos`);
+
                 // Reiniciar jogo
                 document.getElementById('gameCanvas').style.display = 'none';
                 document.getElementById('registrationForm').style.display = 'block';
-                
+
                 // Limpar formulário
                 document.getElementById('fullName').value = '';
                 document.getElementById('email').value = '';
@@ -881,4 +981,5 @@
         });
     </script>
 </body>
+
 </html>
