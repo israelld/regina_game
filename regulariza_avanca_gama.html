@@ -498,14 +498,14 @@
                     <input type="text" id="fullName" required>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group" style="display: none;">
                     <label for="email">Email:</label>
-                    <input type="email" id="email" required>
+                    <input type="email" id="email">
                 </div>
 
-                <div class="form-group">
+                <div class="form-group" style="display: none;">
                     <label for="phone">Telefone:</label>
-                    <input type="tel" id="phone" required>
+                    <input type="tel" id="phone">
                 </div>
 
                 <button class="start-button" onclick="startGame()">Iniciar Aventura! 🚀</button>
@@ -601,38 +601,8 @@
         };
 
         // Dados dos puzzles por nível
-        const puzzles = {
-            1: {
-                title: "Matrícula do Imóvel",
-                question: "Qual documento é essencial para comprovar a propriedade?",
-                options: [
-                    { text: "(1) Matrícula do Imóvel", correct: true },
-                    { text: "(2) Conta de Luz", correct: false },
-                    { text: "(3) CPF do Proprietário", correct: false },
-                    { text: "(4) Foto da Casa", correct: false }
-                ]
-            },
-            2: {
-                title: "INTERPI",
-                question: "Qual o papel principal do INTERPI?",
-                options: [
-                    { text: "(1) Reforma agrária", correct: false },
-                    { text: "(2) Licenciamento ambiental", correct: false },
-                    { text: "(3) Regularização fundiária", correct: true },
-                    { text: "(4) Realizar shows e eventos", correct: false }
-                ]
-            },
-            3: {
-                title: "Georreferenciamento",
-                question: "Para que serve o georreferenciamento de imóveis?",
-                options: [
-                    { text: "(1) Apenas decoração", correct: false },
-                    { text: "(2) Localização precisa e limites", correct: true },
-                    { text: "(3) Calcular impostos", correct: false },
-                    { text: "(4) Definir cores", correct: false }
-                ]
-            }
-        };
+        
+
 
         //function salvarUsuarioLocalEExportar(currentPlayer) {
         //    // Carrega usuários antigos do localStorage
@@ -716,6 +686,90 @@
         //
         //    playersData.push(currentPlayer);
         //}
+        
+        const allPuzzles = [
+            {
+                title: "Matrícula do Imóvel",
+                question: "Qual documento é essencial para comprovar a propriedade?",
+                options: [
+                    { text: "(1) Matrícula do Imóvel", correct: true },
+                    { text: "(2) Conta de Luz", correct: false },
+                    { text: "(3) CPF do Proprietário", correct: false },
+                    { text: "(4) Foto da Casa", correct: false }
+                ]
+            },
+            {
+                title: "INTERPI",
+                question: "Qual o papel principal do INTERPI?",
+                options: [
+                    { text: "(1) Regularização fundiária", correct: true },
+                    { text: "(2) Cobrança de impostos", correct: false },
+                    { text: "(3) Reforma agrária", correct: false },
+                    { text: "(4) Licenciamento ambiental", correct: false }
+                ]
+            },
+            {
+                title: "Georreferenciamento",
+                question: "Para que serve o georreferenciamento de imóveis?",
+                options: [
+                    { text: "(1) Apenas decoração", correct: false },
+                    { text: "(2) Localização precisa e limites", correct: true },
+                    { text: "(3) Calcular impostos", correct: false },
+                    { text: "(4) Definir cores", correct: false }
+                ]
+            },
+            {
+                title: "Órgão Federal",
+                question: "Que órgão federal coopera com o INTERPI?",
+                options: [
+                    { text: "(1) IBGE", correct: false },
+                    { text: "(2) INCRA", correct: true },
+                    { text: "(3) FUNASA", correct: false },
+                    { text: "(4) DNIT", correct: false }
+                ]
+            },
+            {
+                title: "Sobreposição Fundiária",
+                question: "Sobreposição fundiária é...",
+                options: [
+                    { text: "(1) Área urbana", correct: false },
+                    { text: "(2) Conflito de posse", correct: true },
+                    { text: "(3) Título duplicado", correct: false },
+                    { text: "(4) Plantação irregular", correct: false }
+                ]
+            },
+            {
+                title: "Documento Final",
+                question: "Qual documento é emitido após a regularização?",
+                options: [
+                    { text: "(1) RG", correct: false },
+                    { text: "(2) Título definitivo", correct: true },
+                    { text: "(3) CNPJ", correct: false },
+                    { text: "(4) Requisição judicial", correct: false }
+                ]
+            },
+            {
+                title: "Solicitação ao INTERPI",
+                question: "Quem pode requerer serviços ao INTERPI?",
+                options: [
+                    { text: "(1) Somente prefeitos", correct: false },
+                    { text: "(2) Qualquer cidadão", correct: true },
+                    { text: "(3) Empresários rurais", correct: false },
+                    { text: "(4) Técnicos agrícolas", correct: false }
+                ]
+            }
+        ];
+
+        // Variável global para os puzzles escolhidos aleatoriamente
+        let puzzles = [];
+
+        // Função para embaralhar e selecionar 3 puzzles aleatórios
+        function shuffleAndSelectPuzzles() {
+    const shuffled = allPuzzles.slice().sort(() => 0.5 - Math.random());
+    puzzles = shuffled.slice(0, 3);
+}
+
+        // Função principal do jogo
         function startGame() {
             const fullName = document.getElementById('fullName').value.trim();
             const email = document.getElementById('email').value.trim();
@@ -726,7 +780,6 @@
                 return;
             }
 
-            // Criar objeto do jogador
             currentPlayer = {
                 id: Date.now(),
                 fullName,
@@ -739,20 +792,20 @@
                 totalTimeFormatted: ''
             };
 
-            // Limpa elementos antigos do jogo
             document.getElementById('registrationForm').style.display = 'none';
             document.getElementById('gameCanvas').style.display = 'block';
             document.getElementById('playerName').textContent = fullName.split(' ')[0];
 
             gameStartTime = Date.now();
-
-            playersData = []; // reinicia se for novo jogador
-            playersData.push(currentPlayer);
+            playersData = [currentPlayer];
 
             document.getElementById('levelComplete').style.display = 'none';
             document.getElementById('puzzleModal').style.display = 'none';
 
-            initializeLevel(1);
+            // Aqui é onde a mágica acontece 🎩✨
+            shuffleAndSelectPuzzles();
+console.log("Puzzles escolhidos:", puzzles);
+initializeLevel(1);
         }
 
 
@@ -987,55 +1040,55 @@
 
 
         function handleKeyPress(event) {
-    if (!gameState.gameActive) return;
+            if (!gameState.gameActive) return;
 
-    const player = document.getElementById('player');
-    const canvas = document.getElementById('gameCanvas');
-    const canvasRect = canvas.getBoundingClientRect();
+            const player = document.getElementById('player');
+            const canvas = document.getElementById('gameCanvas');
+            const canvasRect = canvas.getBoundingClientRect();
 
-    const playerSize = 40; // ou o tamanho real do personagem, se diferente
-    const maxX = canvasRect.width - playerSize - 10; // margem de segurança
-    const maxY = canvasRect.height - playerSize - 10;
+            const playerSize = 40; // ou o tamanho real do personagem, se diferente
+            const maxX = canvasRect.width - playerSize - 10; // margem de segurança
+            const maxY = canvasRect.height - playerSize - 10;
 
-    const currentX = parseInt(player.style.left);
-    const currentY = parseInt(player.style.top);
-    let newX = currentX;
-    let newY = currentY;
+            const currentX = parseInt(player.style.left);
+            const currentY = parseInt(player.style.top);
+            let newX = currentX;
+            let newY = currentY;
 
-    // Movimentação
-    switch (event.key) {
-        case 'ArrowUp':
-        case 'w':
-        case 'W':
-            newY = Math.max(60, currentY - 20);
-            break;
-        case 'ArrowDown':
-        case 's':
-        case 'S':
-            newY = Math.min(maxY, currentY + 20);
-            break;
-        case 'ArrowLeft':
-        case 'a':
-        case 'A':
-            newX = Math.max(10, currentX - 20);
-            break;
-        case 'ArrowRight':
-        case 'd':
-        case 'D':
-            newX = Math.min(maxX, currentX + 20);
-            break;
-    }
+            // Movimentação
+            switch (event.key) {
+                case 'ArrowUp':
+                case 'w':
+                case 'W':
+                    newY = Math.max(60, currentY - 20);
+                    break;
+                case 'ArrowDown':
+                case 's':
+                case 'S':
+                    newY = Math.min(maxY, currentY + 20);
+                    break;
+                case 'ArrowLeft':
+                case 'a':
+                case 'A':
+                    newX = Math.max(10, currentX - 20);
+                    break;
+                case 'ArrowRight':
+                case 'd':
+                case 'D':
+                    newX = Math.min(maxX, currentX + 20);
+                    break;
+            }
 
-    // Verificar colisões com obstáculos
-    if (!checkCollision(newX, newY)) {
-        player.style.left = newX + 'px';
-        player.style.top = newY + 'px';
-        gameState.playerPosition = { x: newX, y: newY };
+            // Verificar colisões com obstáculos
+            if (!checkCollision(newX, newY)) {
+                player.style.left = newX + 'px';
+                player.style.top = newY + 'px';
+                gameState.playerPosition = { x: newX, y: newY };
 
-        // Verificar coletas de documentos
-        checkDocumentCollection(newX, newY);
-    }
-}
+                // Verificar coletas de documentos
+                checkDocumentCollection(newX, newY);
+            }
+        }
 
 
         function checkCollision(x, y) {
@@ -1086,7 +1139,7 @@
 
         function showPuzzle() {
             gameState.gameActive = false;
-            const puzzle = puzzles[gameState.level] || puzzles[1];
+            const puzzle = puzzles[gameState.level - 1]; // pois agora puzzles é um array
 
             document.getElementById('puzzleTitle').textContent = puzzle.title;
             document.getElementById('puzzleQuestion').textContent = puzzle.question;
@@ -1114,7 +1167,10 @@
                 const index = parseInt(key) - 1;
                 const options = document.querySelectorAll('.puzzle-option');
                 if (options[index]) {
-                    const isCorrect = puzzles[gameState.level].options[index].correct;
+                    const puzzle = puzzles[gameState.level - 1];
+if (!puzzle || !puzzle.options || !puzzle.options[index]) return;
+
+const isCorrect = puzzle.options[index].correct;
                     selectPuzzleOption(isCorrect, index);
                     document.removeEventListener('keydown', handlePuzzleKey);
                 }
@@ -1136,12 +1192,15 @@
                 currentPlayer.totalScore = Math.max(0, currentPlayer.totalScore - 50);
 
                 // Mostrar a correta
-                puzzles[gameState.level].options.forEach((opt, i) => {
-                    if (opt.correct) {
-                        options[i].style.background = '#4CAF50';
-                        options[i].style.color = 'white';
-                    }
-                });
+                const puzzle = puzzles[gameState.level - 1];
+if (puzzle && puzzle.options) {
+    puzzle.options.forEach((opt, i) => {
+        if (opt.correct && options[i]) {
+            options[i].style.background = '#4CAF50';
+            options[i].style.color = 'white';
+        }
+    });
+}
             }
 
             // Após 1s, encerrar modal e seguir
@@ -1366,7 +1425,7 @@
             reader.readAsText(file);
         });
 
-        console.log("Jogadores importados:", importedData);
+        //console.log("Jogadores importados:", importedData);
     </script>
     <div id="rankingModal" style="display:none;">
         <div class="ranking-content">
